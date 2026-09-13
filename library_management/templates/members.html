@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Members{% endblock %}
+{% block content %}
+    <h1>Library Members</h1>
+    <table>
+        <tr><th>Name</th><th>Email</th><th>Phone</th><th>Joined On</th></tr>
+        {% for m in members %}
+        <tr>
+            <td>{{ m.name }}</td>
+            <td>{{ m.email }}</td>
+            <td>{{ m.phone }}</td>
+            <td>{{ m.joined_on }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

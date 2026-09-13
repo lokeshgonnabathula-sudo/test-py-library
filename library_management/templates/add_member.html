@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Add Member{% endblock %}
+{% block content %}
+    <h1>Register a New Member</h1>
+    <form method="post">
+        <label>Full Name</label>
+        <input type="text" name="name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Phone</label>
+        <input type="text" name="phone">
+
+        <br><br>
+        <button type="submit">Register Member</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}All Books{% endblock %}
+{% block content %}
+    <h1>Library Catalog</h1>
+
+    <form method="get" action="{{ url_for('index') }}">
+        <input type="text" name="q" placeholder="Search by title or author..." value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <p>{{ books|length }} book(s) found.</p>
+
+    <table>
+        <tr>
+            <th>Title</th><th>Author</th><th>Genre</th><th>ISBN</th>
+            <th>Total Copies</th><th>Available</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.genre }}</td>
+            <td>{{ book.isbn }}</td>
+            <td>{{ book.total_copies }}</td>
+            <td class="{{ 'badge-low' if book.available_copies == 0 else '' }}">
+                {{ book.available_copies }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

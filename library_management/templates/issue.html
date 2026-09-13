@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Issue Book{% endblock %}
+{% block content %}
+    <h1>Issue a Book</h1>
+
+    {% if books|length == 0 %}
+        <p>No books are currently available to issue.</p>
+    {% else %}
+    <form method="post">
+        <label>Select Book</label>
+        <select name="book_id" required>
+            {% for book in books %}
+                <option value="{{ book.id }}">
+                    {{ book.title }} by {{ book.author }} ({{ book.available_copies }} available)
+                </option>
+            {% endfor %}
+        </select>
+
+        <label>Select Member</label>
+        <select name="member_id" required>
+            {% for m in members %}
+                <option value="{{ m.id }}">{{ m.name }} ({{ m.email }})</option>
+            {% endfor %}
+        </select>
+
+        <br><br>
+        <button type="submit">Issue Book (14-day due date)</button>
+    </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Borrow Records{% endblock %}
+{% block content %}
+    <h1>Borrow Records</h1>
+    <table>
+        <tr>
+            <th>Book</th><th>Member</th><th>Borrowed On</th>
+            <th>Due Date</th><th>Return Date</th><th>Action</th>
+        </tr>
+        {% for r in records %}
+        <tr>
+            <td>{{ r.title }}</td>
+            <td>{{ r.member_name }}</td>
+            <td>{{ r.borrow_date }}</td>
+            <td class="{{ 'overdue' if (not r.return_date and r.due_date < today) else '' }}">
+                {{ r.due_date }}
+            </td>
+            <td>{{ r.return_date if r.return_date else "Not returned yet" }}</td>
+            <td>
+                {% if not r.return_date %}
+                <form method="post" action="{{ url_for('return_book', record_id=r.id) }}">
+                    <button type="submit">Mark Returned</button>
+                </form>
+                {% else %}
+                    ✅ Returned
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
